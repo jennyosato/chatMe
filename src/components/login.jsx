@@ -21,6 +21,27 @@ const Login = () => {
                 <Text style={styles.logo}>ChatMe</Text>
             </View>
           <Text style={styles.headingText}>Login</Text>
+          <View>
+            <Text style={styles.labelText}>Email</Text>
+            <TextInput style={styles.input} keyboardType="email-address"/>
+          </View>
+          <View>
+            <Text style={styles.labelText}>Password</Text>
+            <TextInput style={styles.input}/>
+          </View>
+          <View style={styles.login_btn}>
+            <Button
+              color="#fff"
+              title="Login"
+              onPress={() => Alert.alert("Button clicked")}
+            />  
+          </View>
+          <Text>Don't have an account yet? </Text>
+          <View style={styles.login_divider}>
+            <View style={[styles.lines, styles.left_divider]} />
+            <Text style={styles.spans}>OR</Text>
+            <View style={[styles.lines, styles.right_divider]}/>
+          </View>
           <View style={styles.loginBtn}>
             <Image source={require("../../assets/google.png")} />
             <Button
@@ -45,27 +66,9 @@ const Login = () => {
               onPress={() => Alert.alert("Button clicked")}
             />  
           </View>
-          <View style={styles.login_divider}>
-            <View style={[styles.lines, styles.left_divider]} />
-            <Text style={styles.spans}>OR</Text>
-            <View style={[styles.lines, styles.right_divider]}/>
-          </View>
-          <View>
-            <Text style={styles.labelText}>Email</Text>
-            <TextInput style={styles.input} keyboardType="email-address"/>
-          </View>
-          <View>
-            <Text style={styles.labelText}>Password</Text>
-            <TextInput style={styles.input}/>
-          </View>
-          <View style={styles.login_btn}>
-            <Button
-              color="#fff"
-              title="Login"
-              onPress={() => Alert.alert("Button clicked")}
-            />  
-          </View>
-          <Text>Don't have an account yet? </Text>
+         
+          
+          
          
         </ImageBackground>
     </SafeAreaView>

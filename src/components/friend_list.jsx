@@ -10,6 +10,7 @@ import {
   TextInput,
   ScrollView,
   FlatList,
+  Pressable
 } from "react-native";
 const DATA = [
   {
@@ -17,41 +18,109 @@ const DATA = [
     name: "Jennifer Osato",
     image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNa2w9p0jUB_Y90W_Nr7dMNRfFikC7GR5LTQ&usqp=CAU",
-    lastMsg: "Hey you",
+    email: "jenniferosato@yahoo.co.uk",
   },
   {
     id: 3487,
     name: "Omoyewmen Andy",
     image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWXdHR7jZPJrtBHV1gYDVfJ4VdmstzNOLr3g&usqp=CAU",
-    lastMsg: "Hope you got my gift",
+    email: "Omoyewmenandy@gmail.com",
+  },
+  {
+    id: 1219,
+    name: "Jennifer Osato",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNa2w9p0jUB_Y90W_Nr7dMNRfFikC7GR5LTQ&usqp=CAU",
+    email: "jenniferosato@yahoo.co.uk",
+  },
+  {
+    id: 3488,
+    name: "Omoyewmen Andy",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWXdHR7jZPJrtBHV1gYDVfJ4VdmstzNOLr3g&usqp=CAU",
+    email: "Omoyewmenandy@gmail.com",
+  },
+  {
+    id: 1229,
+    name: "Jennifer Osato",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNa2w9p0jUB_Y90W_Nr7dMNRfFikC7GR5LTQ&usqp=CAU",
+    email: "jenniferosato@yahoo.co.uk",
+  },
+  {
+    id: 3489,
+    name: "Omoyewmen Andy",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWXdHR7jZPJrtBHV1gYDVfJ4VdmstzNOLr3g&usqp=CAU",
+    email: "Omoyewmenandy@gmail.com",
+  },
+  {
+    id: 1239,
+    name: "Jennifer Osato",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNa2w9p0jUB_Y90W_Nr7dMNRfFikC7GR5LTQ&usqp=CAU",
+    email: "jenniferosato@yahoo.co.uk",
+  },
+  {
+    id: 3490,
+    name: "Omoyewmen Andy",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWXdHR7jZPJrtBHV1gYDVfJ4VdmstzNOLr3g&usqp=CAU",
+    email: "Omoyewmenandy@gmail.com",
+  },
+  {
+    id: 1249,
+    name: "Jennifer Osato",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNa2w9p0jUB_Y90W_Nr7dMNRfFikC7GR5LTQ&usqp=CAU",
+    email: "jenniferosato@yahoo.co.uk",
+  },
+  {
+    id: 3491,
+    name: "Omoyewmen Andy",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWXdHR7jZPJrtBHV1gYDVfJ4VdmstzNOLr3g&usqp=CAU",
+    email: "Omoyewmenandy@gmail.com",
   },
 ];
+const Empty = () => {
+    return(
+        <View>
+          <Text style={styles.no_friends_text}>
+            You haven't added any friends yet
+          </Text>
+        </View>
+    )
+}
+
 
 const Friend_list = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.addFriend}>
         <Text style={styles.addFriendText}>Add Friend</Text>
+       
         <TextInput
           style={styles.input}
           placeholder="Add friend by email"
           keyboardType="email-address"
         />
-        <View style={styles.btn}>
-          <Button
-            title="Send Request"
-            color={'#fff'}
-            onPress={() => console.log("friend request sent")}
-          />
-        </View>
+          <Pressable style={styles.btn} onPress={() => console.log('Send friend request')}>
+            <Text style={styles.btn_txt}>Send Request</Text>
+          </Pressable>
+        
+        
       </View>
       <View>
         <Text style={styles.text}>Friends List</Text>
       </View>
-      {DATA.length > 0 ? (
+      
         <FlatList
           data={DATA}
+    
+          ListEmptyComponent={Empty}
+          keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
             <View style={styles.item}>
               <Image
@@ -60,20 +129,13 @@ const Friend_list = () => {
                   uri: item.image,
                 }}
               />
-              <View>
+              <View style={styles.seperator}>
                 <Text style={styles.nameText}>{item.name}</Text>
-                <Text style={styles.msgText}>{item.lastMsg.substring(40)}</Text>
+                <Text style={styles.msgText}>{item.email}</Text>
               </View>
             </View>
           )}
         />
-      ) : (
-        <View>
-          <Text style={styles.no_friends_text}>
-            You haven't added any friends yet
-          </Text>
-        </View>
-      )}
      
     </SafeAreaView>
   );
@@ -82,6 +144,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: '100%',
+    justifyContent: 'center',
     backgroundColor: 'black'
   },
   input: {
@@ -91,53 +154,75 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     padding: 10,
     backgroundColor: "#D5D7DE",
+    width: '100%'
   },
   btn: {
     backgroundColor: "#107C10",
-    paddingVertical: 4,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 8,
     paddingHorizontal: 2,
-    textAlign: "right",
-    width: '50%',
-    
+    borderRadius: 4,
+    elevation: 3,
+    textAlign: 'right',
+    width: '30%',
+    alignSelf: 'flex-end'
+  },
+  btn_txt: {
+    color: '#fff',
+    textAlign: 'justify'
   },
   no_friends_text: {
-    fontSize: 24,
-    color: "darkblue",
+    fontSize: 16,
+    color: "white",
     fontWeight: 700,
   },
   item: {
     flex: 1,
     flexDirection: "row",
-    backgroundColor: "#444857",
     alignItems: "center",
     paddingVertical: 10,
     paddingHorizontal: 10,
     marginVertical: 8,
     marginHorizontal: 16,
+    gap: 10,
+
   },
   profile_image: {
-    borderRadius: "50%",
-    width: 24,
-    height: 24,
+    borderRadius: 50,
+    width: 48,
+    height: 48,
   },
   addFriend: {
-    flex: 1,
-    gap: 4
+    gap: 6, 
+    marginHorizontal: 15, 
+    position: 'relative'
   },
   addFriendText: {
     color: "#fff",
     fontWeight: "500",
-    fontSize: 30,
-    textAlign: 'center'
+    fontSize: 20,
+    textAlign: 'center',
+    paddingVertical: 4
   },
   text: {
     fontWeight: '600',
-    fontSize: 36,
-    lineHeight: 12
+    fontSize: 20,
+    color: '#fff'
   },
-  bgimage: {
-    flex: 1,
-    paddingHorizontal: 20
-  }
+  nameText: {
+    color: '#fff'
+  },
+  msgText: {
+    fontSize: 12,
+    color: "#444857"
+  },
+  seperator: {
+   borderBottomWidth: 1,
+   borderBlockColor: "#444857",
+   width: '100%',
+   paddingVertical: 6
+  },
+ 
 });
 export default Friend_list;
